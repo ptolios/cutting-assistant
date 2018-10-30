@@ -1,0 +1,39 @@
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+footer {
+  height: 35px;
+}
+
+footer #footer-text {
+  padding-top: 5px;
+  padding-right: 5px;
+}
+
+header, main, footer {
+  padding-left: 300px;
+}
+
+@media only screen and (max-width : 992px) {
+  header, main, footer {
+    padding-left: 0;
+  }
+}
+
+#o-w-text {
+  width: 100%;
+  background-color: rgba(0,0,0,0.6);
+  font-size: 30px;
+  padding: 12px;
+}
+
+#slide-out li :active {
+  background-color: yellow;
+}
