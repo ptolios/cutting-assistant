@@ -17,6 +17,10 @@ class OrderStatus:
 
 
 class Order(models.Model):
+    
+    class Meta:
+        verbose_name = 'Παραγγελία'
+        verbose_name_plural = 'Παραγγελίες'
 
     STATUS_CHOICES = (
         (OrderStatus.DRAFT, "Πρόχειρη"),
@@ -37,3 +41,6 @@ class Order(models.Model):
     status = models.IntegerField(
         "Κατάσταση", choices=STATUS_CHOICES, null=False, blank=False, default=0
     )
+
+    def __str__(self):
+        return f"{self._meta.verbose_name} {self.id}"
