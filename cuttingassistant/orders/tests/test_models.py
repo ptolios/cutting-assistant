@@ -1,7 +1,13 @@
 from django.test import TestCase
 from django.utils import timezone
 
-from .models import Order, OrderStatus
+from orders.models import Order, OrderStatus
+
+# return the values of the OrderStatus class properties
+class_vars = [
+    value for key, value in OrderStatus.__dict__.items()
+    if not key.startswith('__')
+]
 
 
 class TestModels(TestCase):
@@ -25,11 +31,13 @@ class TestModels(TestCase):
         self.assertEqual(count_after - count_before, 1)
 
     def test_placement_date(self):
+        # placement_date for order1 is not provided
+        # the default value is assigned, which is the datetime of creation
         now = timezone.now().replace(second=0, microsecond=0)
-        self.assertEqual(self.order1.placement_datetime, now)
+        self.assertAlmostEqual(self.order1.placement_datetime, now)
 
     def test_status(self):
-        self.assertIn(self.order1.status, (1, 2, 3, 4, 5))
+        self.assertIn(self.order1.status, class_vars)
 
     def test_str(self):
         self.assertEqual(str(self.order1), f'Παραγγελία {self.order1.id}')
