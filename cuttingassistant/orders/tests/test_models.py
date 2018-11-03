@@ -31,6 +31,9 @@ class TestModels(TestCase):
     def test_status(self):
         self.assertIn(self.order1.status, (1, 2, 3, 4, 5))
 
+    def test_str(self):
+        self.assertEqual(str(self.order1), f'Παραγγελία {self.order1.id}')
+
 
 class TestURLS(TestCase):
 
