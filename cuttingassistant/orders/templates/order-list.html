@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Παραγγγλίες{% endblock title %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="card grey darken-2">
+            <div class="card-content">
+                <div class="card-title">
+                    <span class="left"><i>ΠΑΡΑΓΓΕΛΙΕΣ</i></span>
+                </div>
+            </div>
+            <div class="card-content">
+                <table class="highlight">
+                    <thead>
+                        <tr>
+                            <th class="center-align">α/α</th>
+                            <th>Πελάτης</th>
+                            <th>Ημ/νια Παραγγελίας</th>
+                            <th class="hide-on-small-only">Ημ/νια Παράδοσης</th>
+                            <th>Κατάσταση</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in order_list %}
+                        <tr onclick="window.alert('dfgdfdhgf')">
+                            <td class="center-align">{{ order.id }}</td>
+                            <td>{{ order.customer }}</td>
+                            <td>{{ order.placement_datetime|date:"d M Y" }}</td>
+                            <td class="hide-on-small-only">{{ order.delivery_date|date:"d M Y" }}</td>
+                            <td>{{ order.get_status_display }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>    
+            </div>
+        </div>
+    </div>
+
+    <style>
+        tbody tr:hover {
+            cursor: pointer;
+        }
+    </style>
+
+{% endblock content %}

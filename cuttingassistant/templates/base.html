@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{% block title %}{% endblock title %} | Cutting Assistant</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--Import Google Icon Font-->
+    <link href="{% static '/iconfont/material-icons.css' %}" rel="stylesheet">
+
+    <!--Import materialize.css-->
+    <link rel="stylesheet" type="text/css" media="screen, projection" href="{% static 'css/materialize.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+</head>
+<body class="grey darken-1 white-text">
+
+  <header>
+    <!-- Navbar -->
+    <nav class="teal">
+      <div class="nav-wrapper">
+        <a href="#" data-target="slide-out" class="sidenav-trigger hide-on-large"><i class="material-icons">menu</i></a>
+      </div>
+    </nav>
+    <!-- Sidenav -->
+    <ul id="slide-out" class="sidenav sidenav-fixed grey">
+      <div class="card grey darken-3">
+        <div class="card-image">
+            <img src="{% static 'images/saw-blade.jpeg' %}">
+            <div class="card-title center-align" id="o-w-text">Cutting Assistant</div>
+        </div>
+        {% block sidenav_items %}
+        <li class="active"><a href="#!" class="white-text waves-effect"><i class="material-icons white-text">assignment</i>Παραγγελίες</a></li>
+        <li><a href="#!" class="waves-effect white-text"><i class="material-icons white-text">people_outline</i>Πελάτες</a></li>
+        <li><a class="waves-effect white-text" href="#!"><i class="material-icons white-text">work_outline</i>Εργασίες</a></li>
+        {% endblock sidenav_items %}
+      </div>
+    </ul>
+
+  </header>
+
+  <main>
+    <div class="center-align">
+      {% block content %} {% endblock content %}
+    </div>
+  </main>
+
+  <footer class="teal white-text">
+    {% block footer %}
+    {% endblock footer %}
+    <div id="footer-text" class="right">Site created by P&J. © 2018</div>
+  </footer>
+
+
+  <!--JavaScript at end of body for optimized loading-->
+  <script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+
+</body>
+</html>
