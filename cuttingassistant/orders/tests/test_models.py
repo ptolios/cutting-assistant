@@ -43,9 +43,3 @@ class TestModels(TestCase):
         self.assertEqual(str(self.order1), f'Παραγγελία {self.order1.id}')
 
 
-class TestURLS(TestCase):
-
-    def test_orders_list_url(self):
-        response = self.client.get('/orders/')
-        self.assertEqual(response.status_code, 200)
-

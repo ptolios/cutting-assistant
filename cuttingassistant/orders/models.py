@@ -44,3 +44,5 @@ class Order(models.Model):
 
     def __str__(self):
         return f"{self._meta.verbose_name} {self.id}"
+#TODO: Add the clean() method to validate the model fields. Check that delivery date is always later than the placement_date
+# see: https://docs.djangoproject.com/en/2.1/ref/models/instances/#django.db.models.Model.clean
