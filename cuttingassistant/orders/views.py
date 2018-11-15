@@ -1,5 +1,9 @@
-from django.http import HttpResponse
+from django.views.generic import ListView
+
+from .models import Order
 
 
-def orders(request):
-    return HttpResponse('This is the orders page...')
+class OrderListView(ListView):
+    model = Order
+    context_object_name = 'order_list'
+    template_name = 'order-list.html'
