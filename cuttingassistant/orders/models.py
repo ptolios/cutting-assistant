@@ -46,3 +46,18 @@ class Order(models.Model):
         return f"{self._meta.verbose_name} {self.id}"
 #TODO: Add the clean() method to validate the model fields. Check that delivery date is always later than the placement_date
 # see: https://docs.djangoproject.com/en/2.1/ref/models/instances/#django.db.models.Model.clean
+
+
+class OrderItem(models.Model):
+    order = models.ForeignKey("Order", on_delete=models.CASCADE)
+    quantity = models.IntegerField("Ποσότητα")
+    x_dimension = models.DecimalField(
+        'Διάσταση Χ',
+        decimal_places=1,
+        max_digits=5
+    )
+    y_dimension = models.DecimalField(
+        'Διάσταση Υ',
+        decimal_places=1,
+        max_digits=5
+    )
