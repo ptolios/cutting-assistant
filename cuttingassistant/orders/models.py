@@ -19,8 +19,8 @@ class OrderStatus:
 class Order(models.Model):
     
     class Meta:
-        verbose_name = 'Παραγγελία'
-        verbose_name_plural = 'Παραγγελίες'
+        verbose_name = "Παραγγελία"
+        verbose_name_plural = "Παραγγελίες"
 
     STATUS_CHOICES = (
         (OrderStatus.DRAFT, "Πρόχειρη"),
@@ -44,20 +44,26 @@ class Order(models.Model):
 
     def __str__(self):
         return f"{self._meta.verbose_name} {self.id}"
-#TODO: Add the clean() method to validate the model fields. Check that delivery date is always later than the placement_date
+#TODO: (panos) Add the clean() method to validate the model fields.
+# Check that delivery_date is always later than the placement_date
 # see: https://docs.djangoproject.com/en/2.1/ref/models/instances/#django.db.models.Model.clean
 
 
 class OrderItem(models.Model):
+    
+    class Meta:
+        verbose_name = "Στοιχείο Παραγγελίας"
+        verbose_name_plural = "Στοιχεία Παραγγελίας"
+
     order = models.ForeignKey("Order", on_delete=models.CASCADE)
-    quantity = models.IntegerField("Ποσότητα")
+    material = models.CharField("Υλικό", max_length=100, null=False, blank=False, default="")
+    quantity = models.PositiveSmallIntegerField("Ποσότητα")
     x_dimension = models.DecimalField(
-        'Διάσταση Χ',
-        decimal_places=1,
-        max_digits=5
+        "Διάσταση Χ", decimal_places=1, max_digits=5
     )
     y_dimension = models.DecimalField(
-        'Διάσταση Υ',
-        decimal_places=1,
-        max_digits=5
+        "Διάσταση Υ", decimal_places=1, max_digits=5
     )
+
+    def __str__(self):
+        return f"{self.order._meta.verbose_name}_{self.order.id} {self._meta.verbose_name}_{self.id}"
