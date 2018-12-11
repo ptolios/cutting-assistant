@@ -31,14 +31,14 @@ class TestOrderDetailsView(TestCase):
         )
         self.orderitem1 = OrderItem.objects.create(
             order=self.order1,
-            material="material #1"
+            material="material #1",
             quantity=5,
             x_dimension=502.5,
             y_dimension=320
         )
         self.orderitem2 = OrderItem(
             order=self.order1,
-            material="material #1"
+            material="material #1",
             quantity=5,
             x_dimension=502.5,
             y_dimension=320
