@@ -65,5 +65,9 @@ class OrderItem(models.Model):
         "Διάσταση Υ", decimal_places=1, max_digits=5
     )
 
+    def total_area(self):
+        # Returns the area from the two dimanesions in square meters
+        return self.quantity * self.x_dimension * self.y_dimension / 1000000
+
     def __str__(self):
         return f"{self.order._meta.verbose_name}_{self.order.id} {self._meta.verbose_name}_{self.id}"
