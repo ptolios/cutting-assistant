@@ -59,9 +59,9 @@ class TestOrderItemModel(TestCase):
         )
         self.orderitem2 = OrderItem(
             order=self.order1,
-            quantity=5,
-            x_dimension=502.5,
-            y_dimension=320
+            quantity=25,
+            x_dimension=178.2,
+            y_dimension=255
         )
 
     def test_orderitem_saved(self):
@@ -69,6 +69,16 @@ class TestOrderItemModel(TestCase):
         self.orderitem2.save()
         count_after: int = OrderItem.objects.count()
         self.assertEqual(count_after - count_before, 1)
+
+    def test_total_area(self):
+        area1 = self.orderitem1.quantity * self.orderitem1.x_dimension * \
+                     self.orderitem1.y_dimension / 1000000
+        area2 = self.orderitem2.quantity * self.orderitem2.x_dimension * \
+                     self.orderitem2.y_dimension / 1000000
+        total_area1 = self.orderitem1.total_area()
+        total_area2 = self.orderitem2.total_area()
+        self.assertEqual(total_area1, area1)
+        self.assertEqual(total_area2, area2)
 
     def test_str(self):
         self.assertEqual(
