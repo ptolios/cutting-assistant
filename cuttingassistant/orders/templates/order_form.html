@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %}Δημιουργία Νέας Παραγγελίας{% endblock title %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="card col s12 xl10 offset-xl1 grey darken-2">
+
+      <h6 class="card-title left-align" style="color: #6d877e">
+        <span class='flow-left'>
+          <strong>Νέα Παραγγελία</strong>
+        </span>
+      </h6>
+
+      <form method="post" onsubmit="cleanUp()" novalidate> {% csrf_token %}
+        {{ order_items_formset.management_form }}
+        {{ form.non_field_errors }}
+        <div class="card grey darken-1 customer-form">
+          <div class="card-content">
+            <div class="row">
+              <div class="col s6">
+                {% for field in form %}
+                  <div class="input-field">
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {{ field.errors }}
+                  </div>
+                {% endfor %}
+              </div>
+              <div class="col s6">
+                dummy placeholder
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row material-form-wrapper">
+          <div class="card col s12 grey lighten-2 material-form">
+            <div class="card">
+              <div class="card-content left-align teal">
+                <a
+                  onclick="addMaterialForm()" 
+                  class="btn-floating btn-large waves-effect waves-light grey">
+                  <i class="material-icons">add</i>
+                </a>
+                <div class="row">
+                  <div class="col s3 valign-wrapper">
+                    <h5 class="flow-text">Υλικό</h5>
+                  </div>
+                  <div
+                    class="input-field col s9">
+                    {{ material_form.material.errors }}
+                    {{ material_form.material }}
+                  </div>
+                </div>
+              </div>
+  
+              {% comment %} <div class="card-content"> {% endcomment %}
+                <div class="row">
+                  <div class="card grey lighten-2">
+                    <div class="card-content col s12 items">
+                      <div 
+                        class="item-row"
+                        oninput="manageButtonOf(this)">
+                        {% for item_form in order_items_formset %}
+                        <div class="row">
+                        {% for field in item_form.visible_fields %}
+                          <div class="input-field col s3">
+                            {{ field.errors }}
+                            {{ field.label_tag }}
+                            {{ field }}
+                          </div>
+                        {% endfor %}
+                          <div class="input-field col s3">
+                            {{ item_form.material }} <!-- This is a hidden input-->
+                          </div>
+                          <div class="col s3">
+                            <button 
+                              type="button"
+                              class="btn-floating hide add var-btn waves-effect waves-light teal"
+                              onclick="addRemoveItemRow()"
+                              data-button="add"
+                              href="#">
+                              <i class="material-icons">add</i>
+                            </button>
+                          </div>
+                        </div>
+                        {% endfor %}
+                        <div class="divider teal"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              {% comment %} </div> {% endcomment %}
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <div class="card-action">
+      <input type="submit" value="Αποθηκευση" class="btn">
+    </div>
+    </form>
+
+
+  </div>
+</div>
+</div>
+
+
+
+{% endblock content %}
+
+{% block scripts %}
+  <script>
+    // Pass template tags as global vars to the javascript script
+    var orderitemFormsetPrefix = '{{ order_items_formset.prefix }}';
+  </script>
+  <script type="text/javascript" src="{% static 'js/order-form.js' %}"></script>
+
+{% endblock scripts %}

@@ -37,3 +37,7 @@ header, main, footer {
 #slide-out li :active {
   background-color: yellow;
 }
+
+.datepicker-row td[class=""] {
+  color: rgb(39, 39, 39);
+}

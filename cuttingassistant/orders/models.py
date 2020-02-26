@@ -42,6 +42,12 @@ class Order(models.Model):
         "Κατάσταση", choices=STATUS_CHOICES, null=False, blank=False, default=0
     )
 
+    def get_absolute_url(self):
+        from django.urls import reverse
+        
+        return reverse("order_details", kwargs={"pk": self.pk})
+    
+
     def __str__(self):
         return f"{self._meta.verbose_name} {self.id}"
 #TODO: (panos) Add the clean() method to validate the model fields.
