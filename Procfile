@@ -1,1 +1,1 @@
-web: gunicorn cuttingassistant.wsgi --log-file -
+web: gunicorn cuttingassistant.wsgi --log-file
