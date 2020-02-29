@@ -15,8 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from django.views.generic import RedirectView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # Temporarily redirect to orders page
+    path('', RedirectView.as_view(url='orders/'), name='home'),
     path('orders/', include('orders.urls'), name='orders')
 ]
