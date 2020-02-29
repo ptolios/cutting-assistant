@@ -1,1 +1,1 @@
-web: gunicorn cuttingassistant.wsgi
+web: gunicorn cuttingassistant.cuttingassistant.wsgi
